@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;600&family=Teko:wght@300&display=swap');
+
+@button-colour-active-hover: #5fb0e8;
+@background-colour: #eef6fb;
+@button-hover-bgcolor: tint(@button-colour-active-hover, 82%);
+@tile-radius: 10px;
+@tile-spacing: 2.5px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+button,
+h1,
+h4,
+h5,
+h6 {
+  background: @background-colour;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333339;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-size: 6em;
+  line-height: 0.8em;
+}
+
+h4 {
+  font-weight: 200;
+}
+
+h6 {
+  font-weight: 100;
+}
+
+.temperature {
+  font-family: 'Teko', sans-serif;
+  font-weight: 300;
+}
+
+h5.temperature {
+  font-size: 2.3em;
+  line-height: 0.9em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  width: 770px;
+  margin: 0 auto;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px;
+}
+
+.city-button {
+  background-color: transparent;
+  padding: 10px 12px;
+  margin: 28px 0;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 200;
+  position: relative;
+  &.active {
+    color: @button-colour-active-hover;
+    font-weight: 600;
+  }
+  // hidden pseudo element with same ::active weight to preset the width of
+  // button text. Prevents buttons from moving when new button becomes active:
+  &::before {
+    display: block;
+    content: attr(value);
+    font-weight: 600;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transition-duration: 0.2s;
+    transition-property: color, background-color, transform;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: @tile-radius;
+  }
+  &:hover::after {
+    transform: scale(1.1);
+    background-color: @button-hover-bgcolor;
+  }
+  &:hover {
+    color: @button-colour-active-hover;
+  }
+}
+
+.elevated-panel {
+  background-color: #fff;
+  box-shadow: 0px 12px 30px rgb(0 0 0 / 14%);
+  border-radius: @tile-radius + 2;
+  display: flex;
+  flex-direction: column;
+  padding: @tile-spacing;
+}
+
+.tile {
+  flex: 1 1 0;
+  background-color: @background-colour;
+  margin: @tile-spacing;
+  display: flex;
+  justify-content: center;
+}
+
+.tile-container-full {
+  display: flex;
+  height: 300px;
+  .tile {
+    padding: 40px 0;
+  }
+  .weather-content-container h4 {
+    font-size: 1.8em;
+  }
+}
+
+.tile-container-small {
+  display: flex;
+  height: 220px;
+  .tile {
+    padding: 25px 0;
+    align-items: center;
+  }
+  .weather-content-container {
+    justify-content: space-between;
+    height: 100%;
+    h6 {
+      font-size: 1.4em;
+    }
+  }
+}
+
+.tile.top-row:first-of-type {
+  border-top-left-radius: @tile-radius;
+}
+
+.tile.top-row:last-of-type {
+  border-top-right-radius: @tile-radius;
+}
+
+.tile.bottom-row:first-of-type {
+  border-bottom-left-radius: @tile-radius;
+}
+
+.tile.bottom-row:last-of-type {
+  border-bottom-right-radius: @tile-radius;
+}
+
+.weather-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.current-weather-container {
+  display: flex;
+  align-items: flex-end;
+  padding-top: 40px;
+  .icon {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+.icon {
+  width: 55px;
+  height: 55px;
+}
+
+.weather-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.current {
+    width: 110px;
+    height: 110px;
+    margin: 0 20px 5px 0;
+    border-radius: @tile-radius + 2;
+  }
+  &.forecast {
+    width: 70px;
+    height: 70px;
+    border-radius: @tile-radius;
+  }
+  &.IconSun-background {
+    background-color: #de722e15;
+  }
+  &.IconCloud-background {
+    background-color: #5f6eee15;
+  }
+  &.IconRain-background {
+    background-color: #1f71e415;
+  }
+  &.IconLightning-background {
+    background-color: #ce2e4515;
+  }
+  &.IconSnow-background {
+    background-color: #19a6cc15;
+  }
+  &.IconSmog-background {
+    background-color: #8040c915;
+  }
+}
+
+.current-weather-subcontainer {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
