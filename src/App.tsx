@@ -40,7 +40,6 @@ const App: FC = () => {
 
   // LIFECYCLE
 
-  // consider using react Suspense instead of useEffect
   useEffect(() => {
     const fetchWeatherData = async () => {
       const weatherObj: City = await getWeather(viewCity)
